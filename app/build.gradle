@@ -75,13 +75,13 @@ android {
 
     applicationVariants.all { variant ->
         variant.getCompileConfiguration().resolutionStrategy {
-            force "com.android.support:support-v7:$versions.supportLibVersion"
-            force "com.android.support:support-v4:$versions.supportLibVersion"
-            force "com.android.support:design:$versions.supportLibVersion"
+            force "com.android.support:support-v7:$versions.supportLib"
+            force "com.android.support:support-v4:$versions.supportLib"
+            force "com.android.support:design:$versions.supportLib"
         }
 
         variant.getRuntimeConfiguration().resolutionStrategy {
-            force "com.android.support:design:$versions.supportLibVersion"
+            force "com.android.support:design:$versions.supportLib"
         }
     }
 
@@ -102,67 +102,71 @@ dependencies {
     // Local libs
     implementation fileTree(include: ['*.jar'], dir: 'libs')
 
+    // Spotify
+    implementation "com.spotify.android:auth:$versions.spotify"
+
     // Kotlin
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$versions.kotlinVersion"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$versions.kotlin"
 
     // Support
-    implementation "com.android.support:appcompat-v7:$versions.supportLibVersion"
-    implementation "com.android.support:recyclerview-v7:$versions.supportLibVersion"
-    implementation "com.android.support:design:$versions.supportLibVersion"
-    implementation "com.android.support.constraint:constraint-layout:$versions.constraintLayoutVersion"
+    //noinspection GradleCompatible
+    implementation "com.android.support:appcompat-v7:$versions.supportLib"
+    implementation "com.android.support:recyclerview-v7:$versions.supportLib"
+    implementation "com.android.support:design:$versions.supportLib"
+    implementation "com.android.support.constraint:constraint-layout:$versions.constraintLayout"
 
     // Network
-    implementation "com.squareup.okhttp3:okhttp:$versions.okhttpVersion"
-    implementation "com.squareup.okhttp3:logging-interceptor:$versions.okhttpVersion"
-    implementation "com.squareup.retrofit2:retrofit:$versions.retrofitVersion"
-    implementation "com.squareup.retrofit2:adapter-rxjava2:$versions.retrofitVersion"
-    implementation "com.squareup.retrofit2:converter-scalars:$versions.retrofitVersion"
-    implementation "com.squareup.moshi:moshi:$versions.moshiVersion"
-    kapt "com.squareup.moshi:moshi-kotlin-codegen:$versions.moshiVersion"
-    implementation "com.squareup.retrofit2:converter-moshi:$versions.retrofitVersion"
+    implementation "com.squareup.okhttp3:okhttp:$versions.okhttp"
+    implementation "com.squareup.okhttp3:logging-interceptor:$versions.okhttp"
+    implementation "com.squareup.retrofit2:retrofit:$versions.retrofit"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$versions.retrofit"
+    implementation "com.squareup.retrofit2:converter-scalars:$versions.retrofit"
+    implementation "com.squareup.moshi:moshi:$versions.moshi"
+    kapt "com.squareup.moshi:moshi-kotlin-codegen:$versions.moshi"
+    implementation "com.squareup.retrofit2:converter-moshi:$versions.retrofit"
 
     // Image
-    implementation "com.github.bumptech.glide:glide:$versions.glideVersion"
-    kapt "com.github.bumptech.glide:compiler:$versions.glideVersion"
+    implementation "com.github.bumptech.glide:glide:$versions.glide"
+    kapt "com.github.bumptech.glide:compiler:$versions.glide"
 
     // Dependency injection
-    implementation "javax.annotation:javax.annotation-api:$versions.javaAnnotationVersion"
-    implementation "com.google.dagger:dagger:$versions.daggerVersion"
-    implementation "com.google.dagger:dagger-android:$versions.daggerVersion"
-    implementation "com.google.dagger:dagger-android-support:$versions.daggerVersion"
-    kapt "com.google.dagger:dagger-compiler:$versions.daggerVersion"
-    kapt "com.google.dagger:dagger-android-processor:$versions.daggerVersion"
+    implementation "javax.annotation:javax.annotation-api:$versions.javaAnnotation"
+    implementation "com.google.dagger:dagger:$versions.dagger"
+    implementation "com.google.dagger:dagger-android:$versions.dagger"
+    implementation "com.google.dagger:dagger-android-support:$versions.dagger"
+    kapt "com.google.dagger:dagger-compiler:$versions.dagger"
+    kapt "com.google.dagger:dagger-android-processor:$versions.dagger"
 
     // LiveData & ViewModel
-    implementation "android.arch.lifecycle:extensions:$versions.archVersion"
-    implementation "android.arch.lifecycle:viewmodel:$versions.archVersion"
+    implementation "android.arch.lifecycle:extensions:$versions.arch"
+    implementation "android.arch.lifecycle:viewmodel:$versions.arch"
 
     // Paging
-    implementation "android.arch.paging:runtime:$versions.archPagingVersion"
+    implementation "android.arch.paging:runtime:$versions.archPaging"
 
     // RX
-    implementation "io.reactivex.rxjava2:rxkotlin:$versions.rxKotlinVersion"
+    implementation "io.reactivex.rxjava2:rxkotlin:$versions.rxKotlin"
 
     // RX binding
-    implementation "com.jakewharton.rxbinding2:rxbinding-kotlin:$versions.rxBindingVersion"
+    implementation "com.jakewharton.rxbinding2:rxbinding-kotlin:$versions.rxBinding"
 
     // Logging
-    implementation "com.jakewharton.timber:timber:$versions.timberVersion"
+    implementation "com.jakewharton.timber:timber:$versions.timber"
 
     // Test
-    testImplementation "junit:junit:$versions.junitVersion"
-    testImplementation "org.mockito:mockito-core:$versions.mockitoVersion"
-    testImplementation "com.nhaarman:mockito-kotlin:$versions.mockitoKotlinVersion"
-    testImplementation "org.assertj:assertj-core:$versions.assertJVersion"
-    testImplementation("android.arch.core:core-testing:$versions.archVersion", {
+    testImplementation "junit:junit:$versions.junit"
+    testImplementation "org.mockito:mockito-core:$versions.mockito"
+    testImplementation "com.nhaarman:mockito-kotlin:$versions.mockitoKotlin"
+    testImplementation "org.assertj:assertj-core:$versions.assertJ"
+    testImplementation("android.arch.core:core-testing:$versions.arch", {
         exclude group: 'com.android.support', module: 'support-compat'
         exclude group: 'com.android.support', module: 'support-annotations'
         exclude group: 'com.android.support', module: 'support-core-utils'
     })
 
     // Android Test
-    androidTestImplementation "com.android.support.test:runner:$versions.testRunnerVersion"
-    androidTestImplementation "com.android.support.test.espresso:espresso-core:$versions.espressoVersion"
+    androidTestImplementation "com.android.support.test:runner:$versions.testRunner"
+    androidTestImplementation "com.android.support.test.espresso:espresso-core:$versions.espresso"
 }
 
 ktlint {
