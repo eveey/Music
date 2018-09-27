@@ -1,0 +1,80 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+
+buildscript {
+
+    ext.buildConfig = [
+            'minSdk'     : 19,
+            'compileSdk' : 28,
+            'targetSdk'  : 28,
+            'buildToolsVersion' : '28.0.2',
+            'packageName': 'com.evastos.music',
+    ]
+
+    ext.versions = [
+            'gradleBuildToolsVersion' : '3.1.4',
+            'ktlintVersion'           : '3.2.0',
+            'detektVersion'           : '1.0.0.RC8',
+            'appCompatVersion'        : '28.0.0-rc02',
+            'kotlinVersion'           : '1.2.71',
+            'supportLibVersion'       : '28.0.0',
+            'constraintLayoutVersion' : '1.1.3',
+            'okhttpVersion'           : '3.10.0',
+            'retrofitVersion'         : '2.4.0',
+            'moshiVersion'            : '1.6.0',
+            'timberVersion'           : '4.7.1',
+            'javaAnnotationVersion'   : '1.3.2',
+            'daggerVersion'           : '2.17',
+            'rxKotlinVersion'         : '2.3.0',
+            'rxBindingVersion'        : '2.1.1',
+            'archVersion'             : '1.1.1',
+            'archPagingVersion'       : '1.0.1',
+            'junitVersion'            : '4.12',
+            'mockitoVersion'          : '2.18.3',
+            'mockitoKotlinVersion'    : '1.5.0',
+            'assertJVersion'          : '3.10.0',
+            'testRunnerVersion'       : '1.0.2',
+            'espressoVersion'         : '3.0.2',
+            'glideVersion'            : '4.8.0'
+    ]
+
+    repositories {
+        google()
+        jcenter()
+        mavenCentral()
+        maven { url 'https://maven.google.com' }
+        maven { url 'https://jitpack.io' }
+        maven { url "https://plugins.gradle.org/m2/" }
+        maven { url 'https://maven.fabric.io/public' }
+    }
+    dependencies {
+        classpath "com.android.tools.build:gradle:$versions.gradleBuildToolsVersion"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$versions.kotlinVersion"
+        classpath "gradle.plugin.org.jlleitschuh.gradle:ktlint-gradle:$versions.ktlintVersion"
+        classpath "gradle.plugin.io.gitlab.arturbosch.detekt:detekt-gradle-plugin:$versions.detektVersion"
+
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        jcenter()
+        maven { url 'https://jitpack.io' }
+        maven { url "https://plugins.gradle.org/m2/" }
+    }
+}
+
+apply plugin: "io.gitlab.arturbosch.detekt"
+detekt {
+    profile("main") {
+        input = "$projectDir/app/src/"
+        config = "$projectDir/config/code_quality/detekt.yml"
+        filters = ".*test.*,.*/resources/.*,.*/tmp/.*"
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
