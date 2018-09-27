@@ -1,2 +1,2 @@
 # Music
-Music is my thing
+Music rebels
