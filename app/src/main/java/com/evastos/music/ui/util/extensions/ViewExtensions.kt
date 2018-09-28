@@ -1,9 +1,12 @@
 package com.evastos.music.ui.util.extensions
 
 import android.support.annotation.LayoutRes
+import android.support.design.widget.Snackbar
+import android.support.v4.content.ContextCompat
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.evastos.music.R
 import com.jakewharton.rxbinding2.view.clicks
 import io.reactivex.Observable
 import io.reactivex.schedulers.Schedulers
@@ -36,4 +39,28 @@ fun View.disable() {
 
 fun ViewGroup.inflate(@LayoutRes layoutRes: Int, attachToRoot: Boolean = false): View {
     return LayoutInflater.from(context).inflate(layoutRes, this, attachToRoot)
+}
+
+fun showSnackbarForView(
+    view: View,
+    snackbarMessage: String,
+    actionMessage: String?,
+    action: (() -> Unit)? = null
+): Snackbar {
+    return Snackbar.make(view, snackbarMessage, Snackbar.LENGTH_INDEFINITE)
+            .apply {
+                setAction(actionMessage) {
+                    action?.invoke()
+                }
+                view.setBackgroundColor(ContextCompat.getColor(context, R.color.black))
+                show()
+            }
+}
+
+fun Snackbar?.hideIfShown() {
+    this?.let {
+        if (it.isShown) {
+            it.dismiss()
+        }
+    }
 }

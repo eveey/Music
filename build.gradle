@@ -3,39 +3,40 @@
 buildscript {
 
     ext.buildConfig = [
-            'minSdk'     : 19,
-            'compileSdk' : 28,
-            'targetSdk'  : 28,
-            'buildToolsVersion' : '28.0.2',
-            'packageName': 'com.evastos.music',
+            'minSdk'           : 19,
+            'compileSdk'       : 28,
+            'targetSdk'        : 28,
+            'buildToolsVersion': '28.0.2',
+            'packageName'      : 'com.evastos.music',
     ]
 
     ext.versions = [
-            'gradleBuildTools' : '3.1.4',
-            'spotify'          : '1.1.0',
-            'appCompat'        : '28.0.0-rc02',
-            'kotlin'           : '1.2.71',
-            'supportLib'       : '28.0.0',
-            'constraintLayout' : '1.1.3',
-            'okhttp'           : '3.10.0',
-            'retrofit'         : '2.4.0',
-            'moshi'            : '1.6.0',
-            'timber'           : '4.7.1',
-            'javaAnnotation'   : '1.3.2',
-            'dagger'           : '2.17',
-            'rxKotlin'         : '2.3.0',
-            'rxBinding'        : '2.1.1',
-            'arch'             : '1.1.1',
-            'archPaging'       : '1.0.1',
-            'junit'            : '4.12',
-            'mockito'          : '2.18.3',
-            'mockitoKotlin'    : '1.5.0',
-            'assertJ'          : '3.10.0',
-            'testRunner'       : '1.0.2',
-            'espresso'         : '3.0.2',
-            'glide'            : '4.8.0',
-            'ktlint'           : '3.2.0',
-            'detekt'           : '1.0.0.RC8'
+            'gradleBuildTools': '3.1.4',
+            'spotify'         : '1.1.0',
+            'appCompat'       : '28.0.0-rc02',
+            'kotlin'          : '1.2.71',
+            'supportLib'      : '28.0.0',
+            'constraintLayout': '1.1.3',
+            'okhttp'          : '3.10.0',
+            'retrofit'        : '2.4.0',
+            'moshi'           : '1.6.0',
+            'timber'          : '4.7.1',
+            'javaAnnotation'  : '1.3.2',
+            'dagger'          : '2.17',
+            'rxKotlin'        : '2.3.0',
+            'rxBinding'       : '2.1.1',
+            'arch'            : '1.1.1',
+            'archPaging'      : '1.0.1',
+            'junit'           : '4.12',
+            'mockito'         : '2.18.3',
+            'mockitoKotlin'   : '1.5.0',
+            'assertJ'         : '3.10.0',
+            'testRunner'      : '1.0.2',
+            'espresso'        : '3.0.2',
+            'glide'           : '4.8.0',
+            'ktlint'          : '3.2.0',
+            'detekt'          : '1.0.0.RC8',
+            'chuck'           : '1.1.0'
     ]
 
     repositories {
@@ -48,7 +49,7 @@ buildscript {
         maven { url 'https://maven.fabric.io/public' }
     }
     dependencies {
-        classpath "com.android.tools.build:gradle:$versions.gradleBuildTools"
+        classpath "com.android.tools.build:gradle:3.2.0"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$versions.kotlin"
         classpath "gradle.plugin.org.jlleitschuh.gradle:ktlint-gradle:$versions.ktlint"
         classpath "gradle.plugin.io.gitlab.arturbosch.detekt:detekt-gradle-plugin:$versions.detekt"

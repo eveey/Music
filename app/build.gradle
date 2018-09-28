@@ -13,8 +13,10 @@ android {
     buildToolsVersion buildConfig.buildToolsVersion
 
     def STRING = 'String'
-    def API_KEY = 'API_KEY'
-    def BASE_API_URL = 'BASE_API_URL'
+    def SPOTIFY_CLIENT_ID = 'SPOTIFY_CLIENT_ID'
+    def SPOTIFY_REDIRECT_SCHEME = 'SPOTIFY_REDIRECT_SCHEME'
+    def SPOTIFY_REDIRECT_HOST = 'SPOTIFY_REDIRECT_HOST'
+    def SPOTIFY_BASE_API_URL = 'SPOTIFY_BASE_API_URL'
     def BASE_IMAGE_URL = 'BASE_IMAGE_URL'
 
     Properties props = new Properties()
@@ -32,8 +34,10 @@ android {
         versionCode 1
         versionName "0.1.0"
 
-//        buildConfigField STRING, API_KEY, props['apiKey']
-        buildConfigField STRING, BASE_API_URL, '"https://api/"'
+        buildConfigField STRING, SPOTIFY_CLIENT_ID, props['clientID']
+        buildConfigField STRING, SPOTIFY_REDIRECT_SCHEME, props['scheme']
+        buildConfigField STRING, SPOTIFY_REDIRECT_HOST, props['host']
+        buildConfigField STRING, SPOTIFY_BASE_API_URL, '"https://api.spotify.com/"'
         buildConfigField STRING, BASE_IMAGE_URL, '"http://image/"'
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -152,6 +156,8 @@ dependencies {
 
     // Logging
     implementation "com.jakewharton.timber:timber:$versions.timber"
+    debugImplementation "com.readystatesoftware.chuck:library:$versions.chuck"
+    releaseImplementation "com.readystatesoftware.chuck:library-no-op:$versions.chuck"
 
     // Test
     testImplementation "junit:junit:$versions.junit"

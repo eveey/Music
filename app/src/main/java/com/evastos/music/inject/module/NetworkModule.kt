@@ -1,7 +1,11 @@
 package com.evastos.music.inject.module
 
+import android.content.Context
 import com.evastos.music.BuildConfig
+import com.evastos.music.data.network.interceptor.AuthInterceptor
 import com.evastos.music.data.network.interceptor.HeadersInterceptor
+import com.evastos.music.inject.qualifier.AppContext
+import com.readystatesoftware.chuck.ChuckInterceptor
 import com.squareup.moshi.Moshi
 import dagger.Module
 import dagger.Provides
@@ -30,15 +34,19 @@ class NetworkModule {
     @Provides
     @Singleton
     fun provideOkHttp(
-        loggingInterceptor: HttpLoggingInterceptor,
-        headersInterceptor: HeadersInterceptor
+        @AppContext context: Context,
+        authInterceptor: AuthInterceptor,
+        headersInterceptor: HeadersInterceptor,
+        loggingInterceptor: HttpLoggingInterceptor
     ): OkHttpClient {
         return OkHttpClient.Builder()
                 .apply {
                     connectTimeout(NETWORK_TIMEOUT_SECONDS, TimeUnit.SECONDS)
                     readTimeout(NETWORK_TIMEOUT_SECONDS, TimeUnit.SECONDS)
                     writeTimeout(NETWORK_TIMEOUT_SECONDS, TimeUnit.SECONDS)
+                    addInterceptor(authInterceptor)
                     addInterceptor(headersInterceptor)
+                    addInterceptor(ChuckInterceptor(context))
                     if (BuildConfig.DEBUG) {
                         addInterceptor(loggingInterceptor)
                     }
