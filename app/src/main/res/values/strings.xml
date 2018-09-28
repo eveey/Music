@@ -1,6 +1,7 @@
 <resources>
-    <string name="app_name">Music</string>
-
-    <string name="activity_title_authentication">Authentication</string>
-
+    <string name="app_name" translatable="false">Music Rebels</string>
+    <string name="activity_title_authentication">Spotify Authentication</string>
+    <string name="action_retry">Retry</string>
+    <string name="action_button_authenticating">Authenticating…</string>
+    <string name="action_button_user">Continue as %s\n%s</string>
 </resources>

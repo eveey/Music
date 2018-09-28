@@ -6,9 +6,13 @@ import android.arch.lifecycle.ViewModelProviders
 import android.content.IntentFilter
 import android.net.ConnectivityManager
 import android.os.Bundle
+import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
+import android.view.View
 import com.evastos.music.data.network.connectivity.NetworkConnectivityReceiver
 import com.evastos.music.ui.base.network.connectivity.NetworkConnectivityObserver
+import com.evastos.music.ui.util.extensions.hideIfShown
+import com.evastos.music.ui.util.extensions.showSnackbarForView
 import dagger.android.AndroidInjection
 import javax.inject.Inject
 
@@ -22,6 +26,8 @@ abstract class BaseActivity : AppCompatActivity() {
     private var networkConnectivityObserver: NetworkConnectivityObserver? = null
 
     private val networkConnectivityReceiver = NetworkConnectivityReceiver()
+
+    private var snackbar: Snackbar? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,5 +64,18 @@ abstract class BaseActivity : AppCompatActivity() {
     override fun onPause() {
         super.onPause()
         unregisterReceiver(networkConnectivityReceiver)
+    }
+
+    protected fun showSnackbar(
+        view: View,
+        snackbarMessage: String,
+        actionMessage: String? = null,
+        action: (() -> Unit)? = null
+    ) {
+        snackbar = showSnackbarForView(view, snackbarMessage, actionMessage, action)
+    }
+
+    protected fun hideSnackbar() {
+        snackbar.hideIfShown()
     }
 }
