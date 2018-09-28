@@ -4,7 +4,7 @@ import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProvider
 import com.evastos.music.inject.qualifier.ViewModelKey
 import com.evastos.music.inject.viewmodel.ViewModelFactory
-import com.evastos.music.ui.authentication.AuthenticationViewModel
+import com.evastos.music.ui.spotify.authentication.AuthenticationViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap

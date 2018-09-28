@@ -1,6 +1,6 @@
 package com.evastos.music.inject.module
 
-import com.evastos.music.ui.authentication.AuthenticationActivity
+import com.evastos.music.ui.spotify.authentication.AuthenticationActivity
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 

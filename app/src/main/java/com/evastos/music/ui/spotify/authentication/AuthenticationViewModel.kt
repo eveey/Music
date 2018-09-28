@@ -1,4 +1,4 @@
-package com.evastos.music.ui.authentication
+package com.evastos.music.ui.spotify.authentication
 
 import android.arch.lifecycle.MediatorLiveData
 import android.arch.lifecycle.MutableLiveData

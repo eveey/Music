@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="@dimen/spacing_2x"
-    tools:context=".ui.authentication.AuthenticationActivity">
+    tools:context=".ui.spotify.authentication.AuthenticationActivity">
 
     <android.support.v7.widget.AppCompatButton
         android:id="@+id/userActionButton"
