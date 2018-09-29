@@ -3,6 +3,7 @@ package com.evastos.music.data.storage.prefs
 import android.content.Context
 import android.content.SharedPreferences
 import com.evastos.music.data.model.spotify.User
+import com.evastos.music.domain.model.AuthData
 import com.evastos.music.inject.qualifier.AppContext
 import com.squareup.moshi.Moshi
 
@@ -17,28 +18,10 @@ class SharedPreferenceStore(
     private val sharedPreferences =
             context.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_PRIVATE)
 
-    override var authToken: String?
-        get() = sharedPreferences[PreferenceStore.Constants.AUTH_TOKEN]
+    override var authData: AuthData?
+        get() = sharedPreferences[PreferenceStore.Constants.AUTH_DATA]
         set(value) {
-            sharedPreferences[PreferenceStore.Constants.AUTH_TOKEN] = value
-        }
-
-    override var authTokenExpiresIn: Int
-        get() = sharedPreferences[PreferenceStore.Constants.AUTH_TOKEN_EXPIRES_IN] ?: 0
-        set(value) {
-            sharedPreferences[PreferenceStore.Constants.AUTH_TOKEN_EXPIRES_IN] = value
-        }
-
-    override var authTokenRefreshedAt: Long
-        get() = sharedPreferences[PreferenceStore.Constants.AUTH_TOKEN_REFRESHED_AT] ?: 0L
-        set(value) {
-            sharedPreferences[PreferenceStore.Constants.AUTH_TOKEN_REFRESHED_AT] = value
-        }
-
-    override var authCode: String?
-        get() = sharedPreferences[PreferenceStore.Constants.AUTH_CODE]
-        set(value) {
-            sharedPreferences[PreferenceStore.Constants.AUTH_CODE] = value
+            sharedPreferences[PreferenceStore.Constants.AUTH_DATA] = value
         }
 
     override var user: User?
@@ -54,6 +37,12 @@ class SharedPreferenceStore(
             is Boolean -> edit { it.putBoolean(key, value) }
             is Float -> edit { it.putFloat(key, value) }
             is Long -> edit { it.putLong(key, value) }
+            is AuthData -> {
+                val authDataJson = Moshi.Builder().build().adapter(AuthData::class.java).toJson(value)
+                edit {
+                    it.putString(key, authDataJson)
+                }
+            }
             is User -> {
                 val userJson = Moshi.Builder().build().adapter(User::class.java).toJson(value)
                 edit {
@@ -75,6 +64,12 @@ class SharedPreferenceStore(
             Boolean::class -> getBoolean(key, defaultValue as? Boolean ?: false) as T?
             Float::class -> getFloat(key, defaultValue as? Float ?: -1f) as T?
             Long::class -> getLong(key, defaultValue as? Long ?: -1) as T?
+            AuthData::class -> {
+                getString(key, defaultValue as? String)?.let {
+                    return Moshi.Builder().build().adapter(AuthData::class.java).fromJson(it) as T?
+                }
+                return null
+            }
             User::class -> {
                 getString(key, defaultValue as? String)?.let {
                     return Moshi.Builder().build().adapter(User::class.java).fromJson(it) as T?

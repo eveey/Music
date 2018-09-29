@@ -15,7 +15,7 @@ class AuthInterceptor
 
     override fun intercept(chain: Interceptor.Chain): Response {
         val request = chain.request().newBuilder().apply {
-            header(HEADER_AUTHORIZATION, BEARER_TOKEN.format(preferenceStore.authToken))
+            header(HEADER_AUTHORIZATION, BEARER_TOKEN.format(preferenceStore.authData?.authToken))
         }.build()
         return chain.proceed(request)
     }

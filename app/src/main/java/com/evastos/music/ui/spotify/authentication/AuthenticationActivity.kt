@@ -53,11 +53,8 @@ class AuthenticationActivity : BaseActivity() {
         })
 
         viewModel.userButtonEnabledLiveData.observe(this, Observer { enabled ->
-            if (enabled == true) {
-                userActionButton.enable()
-            } else {
-                userActionButton.disable()
-            }
+            if (enabled == true) userActionButton.enable()
+            else userActionButton.disable()
         })
     }
 

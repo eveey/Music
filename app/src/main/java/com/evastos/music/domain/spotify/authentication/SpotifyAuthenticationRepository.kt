@@ -9,6 +9,7 @@ import com.evastos.music.data.service.spotify.scopes.Scopes
 import com.evastos.music.data.storage.prefs.PreferenceStore
 import com.evastos.music.domain.Repositories
 import com.evastos.music.domain.livedata.SingleLiveEvent
+import com.evastos.music.domain.model.AuthData
 import com.evastos.music.inject.qualifier.SpotifyRedirectUri
 import com.evastos.music.ui.util.DateTimeUtil
 import com.spotify.sdk.android.authentication.AuthenticationRequest
@@ -28,7 +29,7 @@ class SpotifyAuthenticationRepository
 ) : Repositories.Spotify.Authentication {
 
     companion object {
-        private const val SEC_IN_MILLIS = 1000
+        private const val SEC_IN_MILLIS = 1000L
     }
 
     override var authRequestLiveEvent = SingleLiveEvent<AuthenticationRequest>()
@@ -36,11 +37,8 @@ class SpotifyAuthenticationRepository
     override var userLiveEvent = SingleLiveEvent<User>()
 
     override fun authenticateOrGetUser() {
-        if (isTokenExpired()) {
-            authenticate()
-        } else {
-            userLiveEvent.postValue(preferenceStore.user)
-        }
+        if (isTokenExpired()) authenticate()
+        else userLiveEvent.postValue(preferenceStore.user)
     }
 
     override fun authenticate() {
@@ -53,15 +51,14 @@ class SpotifyAuthenticationRepository
     ) {
         when (authResponse.type) {
             Type.TOKEN -> {
-                preferenceStore.authToken = authResponse.accessToken
-                preferenceStore.authTokenExpiresIn = authResponse.expiresIn
-                preferenceStore.authTokenRefreshedAt = dateTimeUtil.getNow()
-                authRequestLiveEvent.postValue(getAuthRequest(Type.CODE))
-            }
-            Type.CODE -> {
-                preferenceStore.authCode = authResponse.code
+                preferenceStore.authData = AuthData(
+                    authToken = authResponse.accessToken,
+                    authTokenExpiresIn = authResponse.expiresIn * SEC_IN_MILLIS,
+                    authTokenRefreshedAt = dateTimeUtil.getNow()
+                )
                 getUser(disposables)
             }
+            Type.CODE -> Timber.d("AuthResponse type is code")
             Type.ERROR -> authErrorLiveData.postValue(authResponse.error)
             Type.EMPTY -> Timber.d("AuthResponse type is empty")
             Type.UNKNOWN -> Timber.d("AuthResponse type is unknown")
@@ -90,12 +87,9 @@ class SpotifyAuthenticationRepository
     }
 
     private fun isTokenExpired(): Boolean {
-        if (preferenceStore.authToken != null) {
-            val timePassedInSeconds =
-                    (dateTimeUtil.getNow() - preferenceStore.authTokenRefreshedAt) / SEC_IN_MILLIS
-            if (timePassedInSeconds < preferenceStore.authTokenExpiresIn) {
+        preferenceStore.authData?.let {
+            if ((dateTimeUtil.getNow() - it.authTokenRefreshedAt) < it.authTokenExpiresIn)
                 return false
-            }
         }
         return true
     }
