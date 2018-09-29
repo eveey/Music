@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name" translatable="false">Music Rebels</string>
     <string name="activity_title_authentication">Spotify Authentication</string>
+    <string name="activity_title_artists">Spotify Artists</string>
     <string name="action_retry">Retry</string>
     <string name="network_connectivity_banner">No network connection</string>
     <string name="error_server_unavailable">Service is temporarily unavailable. Please try again later.</string>
