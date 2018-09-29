@@ -2,6 +2,10 @@
     <string name="app_name" translatable="false">Music Rebels</string>
     <string name="activity_title_authentication">Spotify Authentication</string>
     <string name="action_retry">Retry</string>
-    <string name="action_button_authenticating">Authenticating…</string>
-    <string name="action_button_user">Continue as %s\n%s</string>
+    <string name="network_connectivity_banner">No network connection</string>
+    <string name="error_server_unavailable">Service is temporarily unavailable. Please try again later.</string>
+    <string name="error_client">You don\'t have permissions to perform this request. Please contact support.</string>
+    <string name="error_network">Network unavailable. Please check your internet connection or try again later.</string>
+    <string name="error_general">Something went wrong. Please contact support or try again later.</string>
+    <string name="error_auth_spotify">Authentication with Spotify failed</string>
 </resources>
