@@ -5,20 +5,15 @@
     android:id="@+id/authenticationView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="@dimen/spacing_2x"
+    android:animateLayoutChanges="true"
     tools:context=".ui.spotify.authentication.AuthenticationActivity">
 
-    <android.support.v7.widget.AppCompatButton
-        android:id="@+id/userActionButton"
-        style="@style/AppButton"
+    <include
+        android:id="@+id/networkConnectivityBanner"
+        layout="@layout/network_connectivity_banner"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/spacing_6x"
-        android:padding="@dimen/spacing_2x"
-        android:textAllCaps="true"
-        android:textSize="@dimen/textSizeSmall"
-        android:text="@string/action_button_authenticating"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_height="0dp"
+        android:visibility="gone"
         app:layout_constraintTop_toTopOf="parent" />
 
 </android.support.constraint.ConstraintLayout>

@@ -2,6 +2,7 @@
 <resources>
 
     <!-- Spacings -->
+    <dimen name="spacing_0_5x">4dp</dimen>
     <dimen name="spacing_1x">8dp</dimen>
     <dimen name="spacing_2x">16dp</dimen>
     <dimen name="spacing_4x">32dp</dimen>
