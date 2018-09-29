@@ -25,6 +25,7 @@ class ArtistsActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         supportActionBar?.apply {
             title = getString(R.string.activity_title_artists)
+            setDisplayHomeAsUpEnabled(false)
         }
 
         viewModel = ViewModelProviders.of(this, viewModelFactory)

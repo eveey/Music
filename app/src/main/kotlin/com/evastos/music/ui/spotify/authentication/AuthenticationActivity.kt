@@ -55,7 +55,9 @@ class AuthenticationActivity : BaseActivity() {
 
         viewModel.userLiveEvent.observe(this, Observer { user ->
             startActivity(ArtistsActivity.newIntent(this))
+            finishAffinity()
         })
+
         viewModel.onCreate(networkConnectivityReceiver.observable)
     }
 
