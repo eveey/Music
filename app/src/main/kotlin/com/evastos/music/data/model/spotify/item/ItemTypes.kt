@@ -1,4 +1,4 @@
-package com.evastos.music.data.service.spotify.item
+package com.evastos.music.data.model.spotify.item
 
 class ItemTypes {
     private val itemTypes = ArrayList<ItemType>()
@@ -8,6 +8,6 @@ class ItemTypes {
     }
 
     override fun toString(): String {
-        return itemTypes.joinToString()
+        return itemTypes.joinToString(separator = ",")
     }
 }

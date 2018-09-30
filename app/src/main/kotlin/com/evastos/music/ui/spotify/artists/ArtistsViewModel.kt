@@ -3,8 +3,8 @@ package com.evastos.music.ui.spotify.artists
 import android.arch.lifecycle.MutableLiveData
 import com.evastos.music.data.rx.applySchedulers
 import com.evastos.music.data.service.spotify.SpotifyService
-import com.evastos.music.data.service.spotify.item.ItemType
-import com.evastos.music.data.service.spotify.item.ItemTypes
+import com.evastos.music.data.model.spotify.item.ItemType
+import com.evastos.music.data.model.spotify.item.ItemTypes
 import com.evastos.music.ui.base.BaseViewModel
 import io.reactivex.Observable
 import timber.log.Timber
@@ -23,16 +23,19 @@ class ArtistsViewModel
         }
 
         disposables.add(spotifyService.search(
-            query = "zhu*",
+            query = "zhu",
             types = ItemTypes().apply {
                 add(ItemType.ARTIST)
+                add(ItemType.TRACK)
+                add(ItemType.ALBUM)
+                add(ItemType.PLAYLIST)
             },
             limit = 20,
             offset = 0
         )
                 .applySchedulers()
                 .subscribe({
-                    Timber.i(it)
+                    Timber.i(it.toString())
                 }, {
                     Timber.e(it)
                 }))

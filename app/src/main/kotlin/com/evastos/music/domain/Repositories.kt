@@ -1,7 +1,7 @@
 package com.evastos.music.domain
 
 import android.arch.lifecycle.MutableLiveData
-import com.evastos.music.data.model.spotify.User
+import com.evastos.music.data.model.spotify.user.User
 import com.evastos.music.domain.livedata.SingleLiveEvent
 import com.spotify.sdk.android.authentication.AuthenticationRequest
 import com.spotify.sdk.android.authentication.AuthenticationResponse
@@ -22,6 +22,9 @@ interface Repositories {
                 authResponse: AuthenticationResponse,
                 disposables: CompositeDisposable
             )
+        }
+
+        interface Artists {
         }
     }
 }

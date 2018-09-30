@@ -3,7 +3,7 @@ package com.evastos.music.domain.spotify.authentication
 import android.arch.lifecycle.MutableLiveData
 import com.evastos.music.BuildConfig
 import com.evastos.music.data.exception.ExceptionMappers
-import com.evastos.music.data.model.spotify.User
+import com.evastos.music.data.model.spotify.user.User
 import com.evastos.music.data.rx.applySchedulers
 import com.evastos.music.data.rx.mapException
 import com.evastos.music.data.service.spotify.SpotifyService

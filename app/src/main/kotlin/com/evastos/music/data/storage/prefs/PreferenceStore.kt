@@ -1,6 +1,6 @@
 package com.evastos.music.data.storage.prefs
 
-import com.evastos.music.data.model.spotify.User
+import com.evastos.music.data.model.spotify.user.User
 import com.evastos.music.domain.model.AuthData
 
 interface PreferenceStore {
