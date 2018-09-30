@@ -11,7 +11,7 @@ import com.evastos.music.ui.spotify.artists.ArtistsActivity
 import com.evastos.music.ui.util.extensions.setGone
 import com.evastos.music.ui.util.extensions.setVisible
 import com.spotify.sdk.android.authentication.AuthenticationClient
-import kotlinx.android.synthetic.main.activity_authentication.authenticationView
+import kotlinx.android.synthetic.main.activity_authentication.authenticationRootView
 import kotlinx.android.synthetic.main.activity_authentication.networkConnectivityBanner
 
 class AuthenticationActivity : BaseActivity() {
@@ -40,22 +40,22 @@ class AuthenticationActivity : BaseActivity() {
 
         viewModel.authErrorLiveData.observe(this, Observer { error ->
             error?.let {
-                showSnackbar(authenticationView, it, getString(R.string.action_retry)) {
+                showSnackbar(authenticationRootView, it, getString(R.string.action_retry)) {
                     viewModel.onRetry()
                 }
             }
             if (error == null) hideSnackbar()
         })
 
+        viewModel.userLiveEvent.observe(this, Observer { _ ->
+            startActivity(ArtistsActivity.newIntent(this))
+            finish()
+        })
+
         viewModel.networkConnectivityBannerLiveData.observe(this, Observer { isVisible ->
             if (isVisible == true) {
                 networkConnectivityBanner.setVisible()
             } else networkConnectivityBanner.setGone()
-        })
-
-        viewModel.userLiveEvent.observe(this, Observer { user ->
-            startActivity(ArtistsActivity.newIntent(this))
-            finishAffinity()
         })
 
         viewModel.onCreate(networkConnectivityReceiver.observable)

@@ -1,6 +1,8 @@
 package com.evastos.music.data.rx
 
+import android.content.Context
 import com.evastos.music.data.exception.ExceptionMapper
+import com.evastos.music.ui.util.extensions.isConnectedToNetwork
 import io.reactivex.Flowable
 import io.reactivex.Observable
 import io.reactivex.Single
@@ -15,10 +17,6 @@ fun <T> Single<T>.applySchedulers(): Single<T> {
 }
 
 fun <T> Observable<T>.applySchedulers(): Observable<T> {
-    return this.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
-}
-
-fun <T> Flowable<T>.applySchedulers(): Flowable<T> {
     return this.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
 }
 
@@ -37,3 +35,14 @@ fun <T> Single<T>.delayError(): Single<T> =
             it.delay(DELAY_ERROR_MILLIS, TimeUnit.MILLISECONDS, Schedulers.computation())
                     .flatMapSingle { error -> Single.error<Unit>(error) }
         }
+
+fun <T> Single<T>.checkNetwork(context: Context, e: Throwable): Single<T> {
+    return Single.just(context.isConnectedToNetwork())
+            .flatMap { it ->
+                if (it) {
+                    this
+                } else {
+                    Single.error<T>(e)
+                }
+            }
+}

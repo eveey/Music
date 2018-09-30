@@ -1,9 +1,9 @@
-package com.evastos.music.data.storage.prefs
+package com.evastos.music.data.persistence.prefs
 
 import android.content.Context
 import android.content.SharedPreferences
 import com.evastos.music.data.model.spotify.user.User
-import com.evastos.music.domain.model.AuthData
+import com.evastos.music.data.model.auth.AuthData
 import com.evastos.music.inject.qualifier.AppContext
 import com.squareup.moshi.Moshi
 
@@ -30,6 +30,12 @@ class SharedPreferenceStore(
         get() = sharedPreferences[PreferenceStore.Constants.USER]
         set(value) {
             sharedPreferences[PreferenceStore.Constants.USER] = value
+        }
+
+    override var artistQuery: String?
+        get() = sharedPreferences[PreferenceStore.Constants.ARTIST_QUERY]
+        set(value) {
+            sharedPreferences[PreferenceStore.Constants.ARTIST_QUERY] = value
         }
 
     operator fun SharedPreferences.set(key: String, value: Any?) {

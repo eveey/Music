@@ -1,7 +1,11 @@
 package com.evastos.music.domain
 
+import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
+import android.arch.paging.PagedList
+import com.evastos.music.data.model.spotify.item.artist.Artist
 import com.evastos.music.data.model.spotify.user.User
+import com.evastos.music.domain.livedata.Listing
 import com.evastos.music.domain.livedata.SingleLiveEvent
 import com.spotify.sdk.android.authentication.AuthenticationRequest
 import com.spotify.sdk.android.authentication.AuthenticationResponse
@@ -14,10 +18,11 @@ interface Repositories {
         interface Authentication {
 
             val authRequestLiveEvent: SingleLiveEvent<AuthenticationRequest>
-            val authErrorLiveData: MutableLiveData<String>
+            val authErrorLiveData: LiveData<String>
             val userLiveEvent: SingleLiveEvent<User>
 
             fun authenticateOrGetUser()
+
             fun handleAuthResponse(
                 authResponse: AuthenticationResponse,
                 disposables: CompositeDisposable
@@ -25,6 +30,20 @@ interface Repositories {
         }
 
         interface Artists {
+
+            val artistSearchLiveData: MutableLiveData<String>
+
+            fun getCachedArtists(disposables: CompositeDisposable): LiveData<PagedList<Artist>>
+
+            fun searchArtists(
+                query: String? = null,
+                disposables: CompositeDisposable
+            ): Listing<Artist>
+
+            fun getArtistSuggestions(
+                query: String,
+                disposables: CompositeDisposable
+            ): LiveData<List<Artist>>
         }
     }
 }

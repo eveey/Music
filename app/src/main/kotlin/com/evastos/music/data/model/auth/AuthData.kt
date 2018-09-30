@@ -1,4 +1,4 @@
-package com.evastos.music.domain.model
+package com.evastos.music.data.model.auth
 
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass

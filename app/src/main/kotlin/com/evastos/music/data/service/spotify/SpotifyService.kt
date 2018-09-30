@@ -16,6 +16,7 @@ interface SpotifyService {
     fun search(
         @Query("q") query: String,
         @Query("type") types: ItemTypes,
+        @Query("market") market: String? = null,
         @Query("limit") limit: Int? = null,
         @Query("offset") offset: Int? = null
     ): Single<SearchResponse>
