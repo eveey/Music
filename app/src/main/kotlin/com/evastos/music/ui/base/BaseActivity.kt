@@ -4,6 +4,7 @@ import android.arch.lifecycle.ViewModelProvider
 import android.content.IntentFilter
 import android.net.ConnectivityManager
 import android.os.Bundle
+import android.support.annotation.LayoutRes
 import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
 import android.view.View
@@ -24,10 +25,14 @@ abstract class BaseActivity : AppCompatActivity() {
 
     protected val networkConnectivityReceiver = NetworkConnectivityReceiver()
 
+    @get:LayoutRes
+    abstract val layoutRes: Int
+
     private var snackbar: Snackbar? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(layoutRes)
         AndroidInjection.inject(this)
     }
 

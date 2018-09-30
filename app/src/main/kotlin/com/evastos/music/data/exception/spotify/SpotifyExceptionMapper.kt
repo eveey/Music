@@ -24,6 +24,9 @@ class SpotifyExceptionMapper
                 exception = it
             }
         }
+        if (throwable is SpotifyException.NetworkFailFastException) {
+            exception = throwable
+        }
         return exception
     }
 

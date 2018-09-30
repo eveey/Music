@@ -1,11 +1,7 @@
 apply plugin: 'com.android.application'
-
 apply plugin: 'kotlin-android'
-
 apply plugin: 'kotlin-android-extensions'
-
 apply plugin: 'kotlin-kapt'
-
 apply plugin: 'org.jlleitschuh.gradle.ktlint'
 
 android {
@@ -129,6 +125,12 @@ dependencies {
     kapt "com.squareup.moshi:moshi-kotlin-codegen:$versions.moshi"
     implementation "com.squareup.retrofit2:converter-moshi:$versions.retrofit"
 
+    // Database
+    implementation "android.arch.persistence.room:runtime:$versions.room"
+    implementation "android.arch.persistence.room:rxjava2:$versions.room"
+    kapt "android.arch.persistence.room:compiler:$versions.room"
+    testImplementation "android.arch.persistence.room:testing:$versions.room"
+
     // Image
     implementation "com.github.bumptech.glide:glide:$versions.glide"
     kapt "com.github.bumptech.glide:compiler:$versions.glide"
@@ -156,8 +158,6 @@ dependencies {
 
     // Logging
     implementation "com.jakewharton.timber:timber:$versions.timber"
-    debugImplementation "com.readystatesoftware.chuck:library:$versions.chuck"
-    releaseImplementation "com.readystatesoftware.chuck:library-no-op:$versions.chuck"
 
     // Test
     testImplementation "junit:junit:$versions.junit"

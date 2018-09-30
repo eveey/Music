@@ -3,16 +3,16 @@ package com.evastos.music.domain.spotify.authentication
 import android.arch.lifecycle.MutableLiveData
 import com.evastos.music.BuildConfig
 import com.evastos.music.data.exception.ExceptionMappers
-import com.evastos.music.data.model.spotify.User
+import com.evastos.music.data.model.auth.AuthData
+import com.evastos.music.data.model.spotify.user.User
+import com.evastos.music.data.persistence.prefs.PreferenceStore
 import com.evastos.music.data.rx.applySchedulers
 import com.evastos.music.data.rx.mapException
 import com.evastos.music.data.service.spotify.SpotifyService
 import com.evastos.music.data.service.spotify.scopes.Scopes
-import com.evastos.music.data.storage.prefs.PreferenceStore
 import com.evastos.music.domain.Repositories
 import com.evastos.music.domain.exception.ExceptionMessageProviders
 import com.evastos.music.domain.livedata.SingleLiveEvent
-import com.evastos.music.domain.model.AuthData
 import com.evastos.music.inject.qualifier.SpotifyRedirectUri
 import com.evastos.music.ui.util.DateTimeUtil
 import com.spotify.sdk.android.authentication.AuthenticationRequest
@@ -102,19 +102,6 @@ class SpotifyAuthenticationRepository
                     }))
     }
 
-    private fun isTokenExpired(): Boolean {
-        preferenceStore.authData?.let {
-            if ((dateTimeUtil.getNow() - it.authTokenRefreshedAt) < it.authTokenExpiresIn)
-                return false
-        }
-        return true
-    }
-
-    private fun clearAuthData() {
-        preferenceStore.authData = null
-        preferenceStore.user = null
-    }
-
     private fun getAuthRequest(type: AuthenticationResponse.Type): AuthenticationRequest =
             AuthenticationRequest.Builder(
                 BuildConfig.SPOTIFY_CLIENT_ID,
@@ -124,4 +111,19 @@ class SpotifyAuthenticationRepository
                     .setShowDialog(false)
                     .setScopes(spotifyScopes.getScopes())
                     .build()
+
+    private fun isTokenExpired(): Boolean {
+        preferenceStore.authData?.let {
+            val now = dateTimeUtil.getNow()
+            val timePassedMillis = now - it.authTokenRefreshedAt
+            if (timePassedMillis < it.authTokenExpiresIn)
+                return false
+        }
+        return true
+    }
+
+    private fun clearAuthData() {
+        preferenceStore.authData = null
+        preferenceStore.user = null
+    }
 }

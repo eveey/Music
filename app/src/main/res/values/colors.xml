@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="accent">#D2FA74</color>
-    <color name="error">#DDF3406E</color>
     <color name="white">@android:color/white</color>
     <color name="black">@android:color/black</color>
     <color name="screenBackground">#212121</color>
-    <color name="networkConnectivityBackground">#F3406E</color>
+    <color name="networkConnectivityBackground">#f296ac</color>
     <color name="pressed">#4D000000</color>
     <color name="transparent">@android:color/transparent</color>
-    <color name="strongAccent">#CBFF4F</color>
+    <color name="loadingBackground">#CC000000</color>
 </resources>

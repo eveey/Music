@@ -5,13 +5,13 @@ import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Toast
 import com.evastos.music.R
 import com.evastos.music.ui.base.BaseActivity
+import com.evastos.music.ui.spotify.artists.ArtistsActivity
 import com.evastos.music.ui.util.extensions.setGone
 import com.evastos.music.ui.util.extensions.setVisible
 import com.spotify.sdk.android.authentication.AuthenticationClient
-import kotlinx.android.synthetic.main.activity_authentication.authenticationView
+import kotlinx.android.synthetic.main.activity_authentication.authenticationRootView
 import kotlinx.android.synthetic.main.activity_authentication.networkConnectivityBanner
 
 class AuthenticationActivity : BaseActivity() {
@@ -20,15 +20,17 @@ class AuthenticationActivity : BaseActivity() {
         private const val AUTH_REQUEST_CODE = 0x11
     }
 
+    override val layoutRes: Int = R.layout.activity_authentication
+
     private lateinit var viewModel: AuthenticationViewModel
 
     @SuppressLint("CheckResult")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_authentication)
         supportActionBar?.let {
             title = getString(R.string.activity_title_authentication)
         }
+
         viewModel = ViewModelProviders.of(this, viewModelFactory)
                 .get(AuthenticationViewModel::class.java)
 
@@ -38,11 +40,16 @@ class AuthenticationActivity : BaseActivity() {
 
         viewModel.authErrorLiveData.observe(this, Observer { error ->
             error?.let {
-                showSnackbar(authenticationView, it, getString(R.string.action_retry)) {
+                showSnackbar(authenticationRootView, it, getString(R.string.action_retry)) {
                     viewModel.onRetry()
                 }
             }
             if (error == null) hideSnackbar()
+        })
+
+        viewModel.userLiveEvent.observe(this, Observer { _ ->
+            startActivity(ArtistsActivity.newIntent(this))
+            finish()
         })
 
         viewModel.networkConnectivityBannerLiveData.observe(this, Observer { isVisible ->
@@ -51,13 +58,6 @@ class AuthenticationActivity : BaseActivity() {
             } else networkConnectivityBanner.setGone()
         })
 
-        viewModel.userLiveEvent.observe(this, Observer { user ->
-            Toast.makeText(
-                this,
-                "Authenticated as $user",
-                Toast.LENGTH_LONG
-            ).show()
-        })
         viewModel.onCreate(networkConnectivityReceiver.observable)
     }
 

@@ -3,6 +3,7 @@ package com.evastos.music.ui.util.extensions
 import android.support.annotation.LayoutRes
 import android.support.design.widget.Snackbar
 import android.support.v4.content.ContextCompat
+import android.support.v4.widget.SwipeRefreshLayout
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -30,16 +31,16 @@ fun View.setInvisible() {
     visibility = View.INVISIBLE
 }
 
-fun View.enable() {
-    isEnabled = true
-}
-
-fun View.disable() {
-    isEnabled = false
-}
-
 fun TextView.showText(text: String?) {
     this.text = text
+}
+
+fun SwipeRefreshLayout.setRefreshing() {
+    isRefreshing = true
+}
+
+fun SwipeRefreshLayout.setNotRefreshing() {
+    isRefreshing = false
 }
 
 fun ViewGroup.inflate(@LayoutRes layoutRes: Int, attachToRoot: Boolean = false): View {

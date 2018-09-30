@@ -10,21 +10,20 @@ import javax.inject.Inject
 class SpotifyExceptionMessageProvider
 @Inject constructor(@AppContext private val context: Context) : ExceptionMessageProviders.Spotify {
 
-    override fun getMessage(exception: SpotifyException): String {
-        var message = context.getString(R.string.error_general)
-        if (exception is SpotifyException.ClientException) {
-            message = context.getString(R.string.error_client)
+    override fun getMessage(exception: SpotifyException): String? {
+        return when (exception) {
+            is SpotifyException.ClientException ->
+                context.getString(R.string.error_client)
+            is SpotifyException.ServerException ->
+                context.getString(R.string.error_server_unavailable)
+            is SpotifyException.NetworkException ->
+                context.getString(R.string.error_network)
+            is SpotifyException.NetworkFailFastException -> null
+            else -> context.getString(R.string.error_general)
         }
-        if (exception is SpotifyException.ServerException) {
-            message = context.getString(R.string.error_server_unavailable)
-        }
-        if (exception is SpotifyException.NetworkException) {
-            message = context.getString(R.string.error_network)
-        }
-        return message
     }
 
-    override fun getMessage(throwable: Throwable): String {
+    override fun getMessage(throwable: Throwable): String? {
         if (throwable is SpotifyException) {
             return getMessage(throwable)
         }
