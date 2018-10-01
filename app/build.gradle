@@ -151,10 +151,11 @@ dependencies {
     implementation "android.arch.paging:runtime:$versions.archPaging"
 
     // RX
+    implementation "io.reactivex.rxjava2:rxjava:$versions.rxJava"
+    implementation "io.reactivex.rxjava2:rxandroid:$versions.rxAndroid"
     implementation "io.reactivex.rxjava2:rxkotlin:$versions.rxKotlin"
-
-    // RX binding
     implementation "com.jakewharton.rxbinding2:rxbinding-kotlin:$versions.rxBinding"
+    implementation "com.jakewharton.rxrelay2:rxrelay:$versions.rxRelay"
 
     // Logging
     implementation "com.jakewharton.timber:timber:$versions.timber"

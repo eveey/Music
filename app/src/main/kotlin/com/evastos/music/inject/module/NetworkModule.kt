@@ -1,8 +1,11 @@
 package com.evastos.music.inject.module
 
+import android.content.Context
 import com.evastos.music.BuildConfig
+import com.evastos.music.data.network.connectivity.NetworkConnectivityProvider
 import com.evastos.music.data.network.interceptor.AuthInterceptor
 import com.evastos.music.data.network.interceptor.HeadersInterceptor
+import com.evastos.music.inject.qualifier.AppContext
 import com.squareup.moshi.Moshi
 import dagger.Module
 import dagger.Provides
@@ -51,4 +54,12 @@ class NetworkModule {
     @Provides
     @Singleton
     fun provideMoshi(): Moshi = Moshi.Builder().build()
+
+    @Provides
+    @Singleton
+    fun provideNetworkConnectivityProvider(
+        @AppContext context: Context
+    ): NetworkConnectivityProvider {
+        return NetworkConnectivityProvider(context)
+    }
 }

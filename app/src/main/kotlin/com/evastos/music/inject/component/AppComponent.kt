@@ -6,6 +6,7 @@ import com.evastos.music.inject.module.AppModule
 import com.evastos.music.inject.module.ExceptionModule
 import com.evastos.music.inject.module.NetworkModule
 import com.evastos.music.inject.module.PersistenceModule
+import com.evastos.music.inject.module.ReceiverBuilder
 import com.evastos.music.inject.module.RepositoryModule
 import com.evastos.music.inject.module.SpotifyModule
 import com.evastos.music.inject.module.UtilModule
@@ -20,6 +21,7 @@ import javax.inject.Singleton
 @Component(modules = [
     AndroidSupportInjectionModule::class,
     ActivityBuilder::class,
+    ReceiverBuilder::class,
     AppModule::class,
     SpotifyModule::class,
     RepositoryModule::class,

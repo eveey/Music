@@ -5,6 +5,7 @@ import android.arch.paging.DataSource
 import android.content.Context
 import com.evastos.music.data.exception.ExceptionMappers
 import com.evastos.music.data.model.spotify.item.artist.Artist
+import com.evastos.music.data.network.connectivity.NetworkConnectivityProvider
 import com.evastos.music.data.persistence.db.artist.ArtistDao
 import com.evastos.music.data.service.spotify.SpotifyService
 import com.evastos.music.domain.exception.ExceptionMessageProviders
@@ -17,12 +18,12 @@ import io.reactivex.disposables.CompositeDisposable
  * in the Repository class.
  */
 class ArtistsSearchDataSourceFactory(
-    @AppContext private val context: Context,
     private val query: String,
     private val spotifyService: SpotifyService,
     private val artistDao: ArtistDao,
     private val exceptionMapper: ExceptionMappers.Spotify,
     private val exceptionMessageProvider: ExceptionMessageProviders.Spotify,
+    private val networkConnectivityProvider: NetworkConnectivityProvider,
     private val disposables: CompositeDisposable
 ) : DataSource.Factory<Int, Artist>() {
 
@@ -30,12 +31,12 @@ class ArtistsSearchDataSourceFactory(
 
     override fun create(): DataSource<Int, Artist> {
         val source = ArtistsSearchDataSource(
-            context,
             query,
             spotifyService,
             artistDao,
             exceptionMapper,
             exceptionMessageProvider,
+            networkConnectivityProvider,
             disposables
         )
         artistsSearchSourceLiveData.postValue(source)

@@ -57,7 +57,9 @@ class ArtistsActivity : BaseActivity() {
                 .get(ArtistsViewModel::class.java)
 
         artistsRecyclerView.apply {
-            artistsAdapter = getArtistsAdapter()
+            artistsAdapter = ArtistsAdapter(GlideApp.with(this)) { artist: Artist? ->
+                viewModel.onArtistClick(artist)
+            }
             layoutManager = GridLayoutManager(context, ARTISTS_COLUMN_COUNT)
             adapter = artistsAdapter
         }
@@ -170,9 +172,4 @@ class ArtistsActivity : BaseActivity() {
         }
         return true
     }
-
-    private fun getArtistsAdapter() =
-            ArtistsAdapter(GlideApp.with(this)) { artist: Artist? ->
-                viewModel.onArtistClick(artist)
-            }
 }

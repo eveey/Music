@@ -50,9 +50,6 @@ class ArtistsViewModel
         loadingStateLiveData.addSource(initialArtistsListing.loadingState) {
             loadingStateLiveData.value = it
         }
-        artistsLiveData.addSource(repository.getCachedArtists(disposables)) {
-            artistsLiveData.value = it
-        }
     }
 
     fun onCreate(networkConnectivityObservable: Observable<Boolean>?) {
