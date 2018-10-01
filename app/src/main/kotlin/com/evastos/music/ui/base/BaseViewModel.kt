@@ -5,11 +5,10 @@ import android.arch.lifecycle.ViewModel
 import com.evastos.music.data.rx.applySchedulers
 import io.reactivex.Observable
 import io.reactivex.disposables.CompositeDisposable
-import timber.log.Timber
 
 abstract class BaseViewModel : ViewModel() {
 
-    protected val disposables: CompositeDisposable = CompositeDisposable()
+    protected val disposables = CompositeDisposable()
 
     val networkConnectivityBannerLiveData = MutableLiveData<Boolean>()
 
@@ -26,11 +25,9 @@ abstract class BaseViewModel : ViewModel() {
             disposables.add(it
                     .distinctUntilChanged()
                     .applySchedulers()
-                    .subscribe({ isConnected ->
+                    .subscribe { isConnected ->
                         onConnectivityChange(isConnected)
-                    }, { throwable ->
-                        Timber.e(throwable)
-                    })
+                    }
             )
         }
     }

@@ -12,7 +12,7 @@ class SharedPreferenceStore(
 ) : PreferenceStore {
 
     companion object {
-        private const val SHARED_PREFERENCES_NAME = "music_rebels_preferences"
+        private const val SHARED_PREFERENCES_NAME = "music_preferences"
     }
 
     private val sharedPreferences =

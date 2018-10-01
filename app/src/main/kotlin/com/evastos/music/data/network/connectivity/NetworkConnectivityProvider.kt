@@ -5,10 +5,10 @@ import android.net.ConnectivityManager
 import com.evastos.music.inject.qualifier.AppContext
 import javax.inject.Inject
 
-class NetworkConnectivityProvider
+open class NetworkConnectivityProvider
 @Inject constructor(@AppContext private val context: Context) {
 
-    fun isConnected(): Boolean {
+    open fun isConnected(): Boolean {
         return with(context) {
             val connectivityManager =
                     this.getSystemService(Context.CONNECTIVITY_SERVICE) as? ConnectivityManager?

@@ -3,8 +3,9 @@
     <color name="accent">#D2FA74</color>
     <color name="white">@android:color/white</color>
     <color name="black">@android:color/black</color>
-    <color name="screenBackground">#212121</color>
-    <color name="networkConnectivityBackground">#f296ac</color>
+    <color name="pinkAccent">#f296ac</color>
+    <color name="artistSuggestionBackground">#212121</color>
+    <color name="networkConnectivityBackground">@color/pinkAccent</color>
     <color name="pressed">#4D000000</color>
     <color name="transparent">@android:color/transparent</color>
     <color name="loadingBackground">#CC000000</color>
