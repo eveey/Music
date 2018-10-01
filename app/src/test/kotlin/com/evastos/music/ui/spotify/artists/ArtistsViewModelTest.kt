@@ -9,6 +9,7 @@ import com.evastos.music.TestUtil
 import com.evastos.music.data.model.spotify.item.artist.Artist
 import com.evastos.music.domain.Repositories
 import com.evastos.music.domain.livedata.LoadingState
+import com.jakewharton.rxrelay2.PublishRelay
 import com.nhaarman.mockito_kotlin.any
 import com.nhaarman.mockito_kotlin.check
 import com.nhaarman.mockito_kotlin.eq
@@ -41,7 +42,9 @@ class ArtistsViewModelTest {
     private val artistSuggestionsLiveDataObserver = mock<Observer<List<Artist>>>()
     private val artistDetailsLiveDataObserver = mock<Observer<Artist>>()
     private val artistSearchLiveDataObserver = mock<Observer<String>>()
+    private val networkConnectivityBannerObserver = mock<Observer<Boolean>>()
 
+    private val networkConnectivityRelay = PublishRelay.create<Boolean>()
     private val artistSearchLiveData = MutableLiveData<String>()
 
     private lateinit var viewModel: ArtistsViewModel
@@ -68,6 +71,8 @@ class ArtistsViewModelTest {
         viewModel.artistSuggestionsLiveData.observeForever(artistSuggestionsLiveDataObserver)
         viewModel.artistDetailsLiveData.observeForever(artistDetailsLiveDataObserver)
         viewModel.artistSearchLiveData.observeForever(artistSearchLiveDataObserver)
+        viewModel.networkConnectivityBannerLiveData
+                .observeForever(networkConnectivityBannerObserver)
     }
 
     @After
@@ -129,7 +134,7 @@ class ArtistsViewModelTest {
     }
 
     @Test
-    fun onRefresh_withSearchedMovies_refreshesSearchedArtists() {
+    fun onRefresh_withSearchedArtists_refreshesSearchedArtists() {
         initialLoad()
         viewModel.onSearchQuerySubmit("Interpol")
 
@@ -151,7 +156,7 @@ class ArtistsViewModelTest {
     }
 
     @Test
-    fun onSearchQuerySubmitTwice_postsNextSearchedMoviesList() {
+    fun onSearchQuerySubmitTwice_postsNextSearchedArtistList() {
         initialLoad()
 
         viewModel.onSearchQuerySubmit("Interpol")
@@ -172,7 +177,7 @@ class ArtistsViewModelTest {
     }
 
     @Test
-    fun onSearchQueryChange_postsMovieSuggestions() {
+    fun onSearchQueryChange_postsArtistSuggestions() {
         initialLoad()
 
         viewModel.onSearchQueryChange("Not")
@@ -184,7 +189,7 @@ class ArtistsViewModelTest {
     }
 
     @Test
-    fun onSearchQueryChange_withSecondChange_postsNextMovieSuggestions() {
+    fun onSearchQueryChange_withSecondChange_postsNextArtistSuggestions() {
         initialLoad()
 
         viewModel.onSearchQueryChange("Not")
@@ -210,6 +215,24 @@ class ArtistsViewModelTest {
         viewModel.artistSearchLiveData.postValue("New search")
 
         verify(artistSearchLiveDataObserver).onChanged("New search")
+    }
+
+    @Test
+    fun onCreate_withNoNetwork_postsNetworkConnectivityBannerVisible() {
+        viewModel.onCreate(networkConnectivityRelay)
+
+        networkConnectivityRelay.accept(false)
+
+        verify(networkConnectivityBannerObserver).onChanged(true)
+    }
+
+    @Test
+    fun onCreate_withNetwork_postsNetworkConnectivityBannerNotVisible() {
+        viewModel.onCreate(networkConnectivityRelay)
+
+        networkConnectivityRelay.accept(true)
+
+        verify(networkConnectivityBannerObserver).onChanged(false)
     }
 
     private fun initialLoad() {

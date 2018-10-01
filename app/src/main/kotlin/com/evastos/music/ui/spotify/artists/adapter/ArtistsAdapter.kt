@@ -23,18 +23,18 @@ class ArtistsAdapter(
 ) : PagedListAdapter<Artist, RecyclerView.ViewHolder>(ArtistDiffItemCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return MovieItemViewHolder(parent.inflate(R.layout.layout_item_artist))
+        return ArtistItemViewHolder(parent.inflate(R.layout.layout_item_artist))
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        if (holder is MovieItemViewHolder) {
+        if (holder is ArtistItemViewHolder) {
             holder.bind(getItem(position))
         } else {
             throw RuntimeException("Unknown view holder type")
         }
     }
 
-    private inner class MovieItemViewHolder(movieItemView: View) :
+    private inner class ArtistItemViewHolder(movieItemView: View) :
         RecyclerView.ViewHolder(movieItemView) {
 
         fun bind(artist: Artist?) {
