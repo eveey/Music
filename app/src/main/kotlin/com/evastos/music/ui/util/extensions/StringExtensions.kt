@@ -25,5 +25,5 @@ fun String.formatQuery(): String {
             replace(it.toString(), "\\$it")
         }
     }
-    return this
+    return "$this*"
 }

@@ -173,7 +173,7 @@ class ArtistsSearchDataSourceTest {
         })
         verify(loadCallback).onResult(TestUtil.artistList2, 1)
         verify(spotifyService).search(
-            eq("Iceage"),
+            eq("Iceage*"),
             check {
                 assertEquals("artist", it.toString())
             },
@@ -198,7 +198,7 @@ class ArtistsSearchDataSourceTest {
         })
         verify(loadCallback).onResult(TestUtil.artistList2, 1)
         verify(spotifyService, times(2)).search(
-            eq("Iceage"),
+            eq("Iceage*"),
             check {
                 assertEquals("artist", it.toString())
             },
@@ -221,7 +221,7 @@ class ArtistsSearchDataSourceTest {
         })
         verify(loadInitialCallback).onResult(TestUtil.artistList2, -1, 1)
         verify(spotifyService).search(
-            eq("Iceage"),
+            eq("Iceage*"),
             check {
                 assertEquals("artist", it.toString())
             },
@@ -246,7 +246,7 @@ class ArtistsSearchDataSourceTest {
         })
         verify(loadInitialCallback).onResult(TestUtil.artistList2, -1, 1)
         verify(spotifyService, times(2)).search(
-            eq("Iceage"),
+            eq("Iceage*"),
             check {
                 assertEquals("artist", it.toString())
             },

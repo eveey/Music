@@ -113,7 +113,7 @@ class ArtistsRepositoryTest {
         artistsRepository.getArtistSuggestions("Clams Casino", CompositeDisposable())
 
         verify(spotifyService).search(
-            eq("Clams Casino"),
+            eq("Clams Casino*"),
             check {
                 assertEquals("artist", it.toString())
             },
