@@ -18,17 +18,19 @@ import com.spotify.sdk.android.authentication.AuthenticationResponse
 
 object TestUtil {
 
-    val artists = MutableLiveData<PagedList<Artist>>()
-    val artistsLoadingState = MutableLiveData<LoadingState>()
-    val artistsRefresh = mock<() -> Unit>()
-    val artistsRetry = mock<() -> Unit>()
+    val artistPagedList1 = mock<PagedList<Artist>>()
+    val artists1 = MutableLiveData<PagedList<Artist>>()
+    val artistsLoadingState1 = MutableLiveData<LoadingState>()
+    val artistsRefresh1 = mock<() -> Unit>()
+    val artistsRetry1 = mock<() -> Unit>()
 
-    val artistsListing = Listing(
-        pagedList = artists,
-        loadingState = artistsLoadingState,
-        refresh = artistsRefresh,
-        retry = artistsRetry)
+    val artistsListing1 = Listing(
+        pagedList = artists1,
+        loadingState = artistsLoadingState1,
+        refresh = artistsRefresh1,
+        retry = artistsRetry1)
 
+    val artistPagedList2 = mock<PagedList<Artist>>()
     val artists2 = MutableLiveData<PagedList<Artist>>()
     val artistsLoadingState2 = MutableLiveData<LoadingState>()
     val artistsRefresh2 = mock<() -> Unit>()
@@ -39,6 +41,18 @@ object TestUtil {
         loadingState = artistsLoadingState2,
         refresh = artistsRefresh2,
         retry = artistsRetry2)
+
+    val artistPagedList3 = mock<PagedList<Artist>>()
+    val artists3 = MutableLiveData<PagedList<Artist>>()
+    val artistsLoadingState3 = MutableLiveData<LoadingState>()
+    val artistsRefresh3 = mock<() -> Unit>()
+    val artistsRetry3 = mock<() -> Unit>()
+
+    val artistsListing3 = Listing(
+        pagedList = artists3,
+        loadingState = artistsLoadingState3,
+        refresh = artistsRefresh3,
+        retry = artistsRetry3)
 
     val artistSuggestions1 = MutableLiveData<List<Artist>>()
     val artistSuggestions2 = MutableLiveData<List<Artist>>()
@@ -57,11 +71,8 @@ object TestUtil {
         uri = "artist_uri"
     )
 
-    val artistList = listOf(artist)
+    val artistList1 = listOf(artist)
     val artistList2 = listOf(artist, artist)
-
-    val artistPagedList = mock<PagedList<Artist>>()
-    val artistPagedList2 = mock<PagedList<Artist>>()
 
     val loading = LoadingState.Loading()
     val success = LoadingState.Success()
