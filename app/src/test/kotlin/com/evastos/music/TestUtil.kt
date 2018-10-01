@@ -2,6 +2,7 @@ package com.evastos.music
 
 import android.arch.lifecycle.MutableLiveData
 import android.arch.paging.PagedList
+import com.evastos.music.data.model.authentication.AuthData
 import com.evastos.music.data.model.spotify.item.ItemType
 import com.evastos.music.data.model.spotify.item.Items
 import com.evastos.music.data.model.spotify.item.artist.Artist
@@ -9,6 +10,7 @@ import com.evastos.music.data.model.spotify.item.artist.Followers
 import com.evastos.music.data.model.spotify.item.artist.Image
 import com.evastos.music.data.model.spotify.search.ExternalUrls
 import com.evastos.music.data.model.spotify.search.SearchResponse
+import com.evastos.music.data.model.spotify.user.User
 import com.evastos.music.domain.livedata.Listing
 import com.evastos.music.domain.livedata.LoadingState
 import com.nhaarman.mockito_kotlin.mock
@@ -79,5 +81,25 @@ object TestUtil {
             limit = 10,
             total = 50
         )
+    )
+
+    val autDataValid = AuthData(
+        authToken = "authTokenValid",
+        authTokenExpiresIn = 1000L,
+        authTokenRefreshedAt = 0L
+    )
+
+    val autDataExpired = AuthData(
+        authToken = "authTokenExpired",
+        authTokenExpiresIn = 0L,
+        authTokenRefreshedAt = 10L
+    )
+
+    val user = User(
+        id = "id",
+        displayName = "displayName",
+        uri = "uri",
+        type = "user",
+        email = "email"
     )
 }

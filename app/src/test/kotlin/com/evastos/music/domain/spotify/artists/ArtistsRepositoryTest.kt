@@ -52,7 +52,6 @@ class ArtistsRepositoryTest {
         whenever(exceptionMapper.map(any())).thenReturn(SpotifyException.ClientException())
         whenever(spotifyService.search(any(), any(), any(), isNull(), isNull()))
                 .thenReturn(Single.just(TestUtil.searchResponse))
-        artistQueryObserver
 
         artistsRepository = ArtistsRepository(
             spotifyService = spotifyService,
@@ -76,11 +75,11 @@ class ArtistsRepositoryTest {
 
     @Test
     fun searchArtists_withNullSearch_postsInitialArtistSearch() {
-        whenever(preferenceStore.artistQuery).thenReturn("")
+        whenever(preferenceStore.artistQuery).thenReturn(null)
 
         artistsRepository.searchArtists(null, CompositeDisposable())
 
-        artistQueryObserver.onChanged(eq("ZHU"))
+        verify(artistQueryObserver).onChanged(eq("ZHU"))
     }
 
     @Test
@@ -89,7 +88,7 @@ class ArtistsRepositoryTest {
 
         artistsRepository.searchArtists(null, CompositeDisposable())
 
-        artistQueryObserver.onChanged(eq("saved_query"))
+        verify(artistQueryObserver).onChanged(eq("saved_query"))
     }
 
     @Test
@@ -98,7 +97,7 @@ class ArtistsRepositoryTest {
 
         artistsRepository.searchArtists("SNTS", CompositeDisposable())
 
-        artistQueryObserver.onChanged(eq("SNTS"))
+        verify(artistQueryObserver).onChanged(eq("SNTS"))
     }
 
     @Test
