@@ -55,7 +55,6 @@ object TestUtil {
             Image(width = 4, height = 40, url = "image_url2")),
         name = "Iceage",
         uri = "artist_uri"
-
     )
 
     val artistList = listOf(artist)
