@@ -211,7 +211,8 @@ class AuthenticationRepositoryTest {
 
     private fun getAuthResponse(
         type: AuthenticationResponse.Type?,
-        token: String? = null): AuthenticationResponse =
+        token: String? = null
+    ): AuthenticationResponse =
             AuthenticationResponse.Builder()
                     .setType(type)
                     .setAccessToken(token)
