@@ -26,7 +26,7 @@ import javax.inject.Inject
 
 class ArtistsRepository
 @Inject constructor(
-    private val service: SpotifyService,
+    private val spotifyService: SpotifyService,
     private val preferenceStore: PreferenceStore,
     private val exceptionMapper: ExceptionMappers.Spotify,
     private val exceptionMessageProvider: ExceptionMessageProviders.Spotify,
@@ -54,7 +54,7 @@ class ArtistsRepository
         artistSearchLiveData.postValue(artistQuery)
         val sourceFactory = ArtistsSearchDataSourceFactory(
             artistQuery,
-            service,
+            spotifyService,
             exceptionMapper,
             exceptionMessageProvider,
             networkConnectivityProvider,
@@ -88,7 +88,7 @@ class ArtistsRepository
     ): LiveData<List<Artist>> {
         val suggestionsLiveData = MutableLiveData<List<Artist>>()
         disposables.add(
-            service.search(
+            spotifyService.search(
                 query = query.formatQuery(),
                 types = ItemTypes().apply {
                     add(ItemType.ARTIST)
