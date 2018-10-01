@@ -28,12 +28,12 @@ Important note: to use the services you need to register on [Spotify Developer C
 * [RxRelay](https://github.com/JakeWharton/RxRelay)
 
 ## Dependency management
-* [Google/Dagger](https://github.com/google/dagger) - Dependency injection.
+* [Google/Dagger](https://github.com/google/dagger) - Dependency injection
 
 ## Network
-* [Square/Retrofit](https://github.com/square/retrofit) - HTTP RESTful connections.
-* [OkHttp 3](https://square.github.io/okhttp/3.x/okhttp/) - HTTP client.
-* [Square/Moshi](https://github.com/square/moshi) - Network JSON deserializer.
+* [Square/Retrofit](https://github.com/square/retrofit) - HTTP RESTful connections
+* [OkHttp 3](https://square.github.io/okhttp/3.x/okhttp/) - HTTP client
+* [Square/Moshi](https://github.com/square/moshi) - Network JSON deserializer
 
 ## Unit tests
 * [JUnit4](https://junit.org/junit4/)
@@ -42,21 +42,21 @@ Important note: to use the services you need to register on [Spotify Developer C
 ## Other
 ### Image loading
 * [Glide](https://github.com/bumptech/glide) - 
-An image loading and caching library for Android focused on smooth scrolling.
+An image loading and caching library for Android focused on smooth scrolling
 ### Logging
 * [Timber](https://github.com/JakeWharton/timber)
 ### Code quality
-* [Ktlint](https://ktlint.github.io/) - An anti-bikeshedding Kotlin linter with built-in formatter.
-* [Detekt](https://github.com/arturbosch/detekt) - Static code analysis for Kotlin.
+* [Ktlint](https://ktlint.github.io/) - An anti-bikeshedding Kotlin linter with built-in formatter
+* [Detekt](https://github.com/arturbosch/detekt) - Static code analysis for Kotlin
 
 ## Roadmap:
-* [Espresso](https://developer.android.com/training/testing/espresso/) - UI testing framework.
-* [ProGuard](https://www.guardsquare.com/en/products/proguard) - Code obfuscation.
-* [CircleCI](https://circleci.com/) - Continuous integration.
-* [Firebase](https://firebase.google.com/) - Analytics.
+* [Espresso](https://developer.android.com/training/testing/espresso/) - UI testing framework
+* [ProGuard](https://www.guardsquare.com/en/products/proguard) - Code obfuscation
+* [CircleCI](https://circleci.com/) - Continuous integration
+* [Firebase](https://firebase.google.com/) - Analytics
 
 ## Wunderlist:
-* [Android Jetpack/Navigation](https://developer.android.com/topic/libraries/architecture/navigation/) - Android navigation framework.
+* [Android Jetpack/Navigation](https://developer.android.com/topic/libraries/architecture/navigation/) - Android navigation framework
 
 ## Disclaimer:
 ```PERSONAL PROJECT - NOT INTENDED FOR COMMERCIAL USE```
