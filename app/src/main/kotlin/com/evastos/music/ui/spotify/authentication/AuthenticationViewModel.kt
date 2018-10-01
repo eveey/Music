@@ -1,6 +1,5 @@
 package com.evastos.music.ui.spotify.authentication
 
-import android.arch.lifecycle.MutableLiveData
 import com.evastos.music.domain.Repositories
 import com.evastos.music.ui.base.BaseViewModel
 import com.spotify.sdk.android.authentication.AuthenticationResponse
@@ -15,7 +14,6 @@ class AuthenticationViewModel
     val authRequestLiveEvent = repository.authRequestLiveEvent
     val authErrorLiveData = repository.authErrorLiveData
     val userLiveEvent = repository.userLiveEvent
-    val networkConnectivityBannerLiveData = MutableLiveData<Boolean>()
 
     fun onCreate(networkConnectivityObservable: Observable<Boolean>?) {
         super.onCreate(networkConnectivityObservable) { isConnected ->

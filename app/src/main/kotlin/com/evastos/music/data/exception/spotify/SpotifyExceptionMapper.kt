@@ -1,6 +1,7 @@
 package com.evastos.music.data.exception.spotify
 
 import com.evastos.music.data.exception.ExceptionMappers
+import com.evastos.music.data.exception.network.NetworkFailFastException
 import retrofit2.HttpException
 import java.net.ConnectException
 import java.net.HttpURLConnection
@@ -24,8 +25,8 @@ class SpotifyExceptionMapper
                 exception = it
             }
         }
-        if (throwable is SpotifyException.NetworkFailFastException) {
-            exception = throwable
+        if (throwable is NetworkFailFastException) {
+            exception = SpotifyException.NetworkFailFastException()
         }
         return exception
     }

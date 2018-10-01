@@ -2,7 +2,6 @@ package com.evastos.music.ui.spotify.artists
 
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MediatorLiveData
-import android.arch.lifecycle.MutableLiveData
 import android.arch.paging.PagedList
 import com.evastos.music.data.model.spotify.item.artist.Artist
 import com.evastos.music.domain.Repositories
@@ -41,17 +40,12 @@ class ArtistsViewModel
     private var retrySearchArtists: () -> Unit = initialArtistsListing.retry
     private var refreshSearchArtists: () -> Unit = initialArtistsListing.refresh
 
-    val networkConnectivityBannerLiveData = MutableLiveData<Boolean>()
-
     init {
         artistsLiveData.addSource(initialArtistsListing.pagedList) {
             artistsLiveData.value = it
         }
         loadingStateLiveData.addSource(initialArtistsListing.loadingState) {
             loadingStateLiveData.value = it
-        }
-        artistsLiveData.addSource(repository.getCachedArtists(disposables)) {
-            artistsLiveData.value = it
         }
     }
 

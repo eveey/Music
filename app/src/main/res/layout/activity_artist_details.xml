@@ -9,6 +9,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:fillViewport="true"
         android:scrollbars="none">
 
         <android.support.constraint.ConstraintLayout
@@ -22,7 +23,7 @@
                 android:layout_height="0dp"
                 android:background="@color/black"
                 android:scaleType="centerCrop"
-                app:layout_constraintDimensionRatio="H,30:17"
+                app:layout_constraintDimensionRatio="H,21:13"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 tools:ignore="ContentDescription" />
@@ -36,11 +37,15 @@
                 android:layout_marginEnd="@dimen/spacing_2x"
                 android:layout_marginBottom="@dimen/spacing_1x"
                 android:gravity="start"
-                android:textSize="@dimen/textSizeSmall"
-                app:layout_constraintTop_toBottomOf="@+id/artistImageView" />
+                android:textColor="@color/accent"
+                android:textSize="@dimen/textSizeMedium"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@+id/artistImageView"
+                tools:text="Mogwai"
+                tools:visibility="visible" />
 
             <android.support.v7.widget.AppCompatTextView
-                android:id="@+id/artistOverviewTextView"
+                android:id="@+id/artistGenresTextView"
                 android:layout_width="match_parent"
                 android:layout_height="0dip"
                 android:layout_marginStart="@dimen/spacing_2x"
@@ -48,8 +53,40 @@
                 android:layout_marginEnd="@dimen/spacing_2x"
                 android:gravity="start|top"
                 android:textSize="@dimen/textSizeSmall"
-                app:layout_constraintTop_toBottomOf="@+id/artistNameTextView" />
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@+id/artistNameTextView"
+                tools:text="Indie, dreampop, shoegaze"
+                tools:visibility="visible" />
 
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/artistFollowersTextView"
+                android:layout_width="match_parent"
+                android:layout_height="0dip"
+                android:layout_marginStart="@dimen/spacing_2x"
+                android:layout_marginTop="@dimen/spacing_2x"
+                android:layout_marginEnd="@dimen/spacing_2x"
+                android:gravity="start|top"
+                android:textSize="@dimen/textSizeSmall"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@+id/artistGenresTextView"
+                tools:text="Followers: 198272763"
+                tools:visibility="visible" />
+
+            <android.support.v7.widget.AppCompatButton
+                android:id="@+id/artistExternalUrlButton"
+                style="@style/AppButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_1x"
+                android:layout_marginEnd="@dimen/spacing_1x"
+                android:layout_marginTop="@dimen/spacing_4x"
+                android:gravity="center"
+                android:padding="@dimen/spacing_1x"
+                android:text="@string/action_open_external_url"
+                android:textSize="@dimen/textSizeSmall"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@+id/artistFollowersTextView"
+                tools:visibility="visible" />
         </android.support.constraint.ConstraintLayout>
     </ScrollView>
 

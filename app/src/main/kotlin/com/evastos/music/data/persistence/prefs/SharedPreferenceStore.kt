@@ -2,8 +2,8 @@ package com.evastos.music.data.persistence.prefs
 
 import android.content.Context
 import android.content.SharedPreferences
+import com.evastos.music.data.model.authentication.AuthData
 import com.evastos.music.data.model.spotify.user.User
-import com.evastos.music.data.model.auth.AuthData
 import com.evastos.music.inject.qualifier.AppContext
 import com.squareup.moshi.Moshi
 

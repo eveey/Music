@@ -125,12 +125,6 @@ dependencies {
     kapt "com.squareup.moshi:moshi-kotlin-codegen:$versions.moshi"
     implementation "com.squareup.retrofit2:converter-moshi:$versions.retrofit"
 
-    // Database
-    implementation "android.arch.persistence.room:runtime:$versions.room"
-    implementation "android.arch.persistence.room:rxjava2:$versions.room"
-    kapt "android.arch.persistence.room:compiler:$versions.room"
-    testImplementation "android.arch.persistence.room:testing:$versions.room"
-
     // Image
     implementation "com.github.bumptech.glide:glide:$versions.glide"
     kapt "com.github.bumptech.glide:compiler:$versions.glide"
@@ -151,10 +145,11 @@ dependencies {
     implementation "android.arch.paging:runtime:$versions.archPaging"
 
     // RX
+    implementation "io.reactivex.rxjava2:rxjava:$versions.rxJava"
+    implementation "io.reactivex.rxjava2:rxandroid:$versions.rxAndroid"
     implementation "io.reactivex.rxjava2:rxkotlin:$versions.rxKotlin"
-
-    // RX binding
     implementation "com.jakewharton.rxbinding2:rxbinding-kotlin:$versions.rxBinding"
+    implementation "com.jakewharton.rxrelay2:rxrelay:$versions.rxRelay"
 
     // Logging
     implementation "com.jakewharton.timber:timber:$versions.timber"

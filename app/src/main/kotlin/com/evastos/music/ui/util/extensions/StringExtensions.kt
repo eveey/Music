@@ -1,6 +1,6 @@
 package com.evastos.music.ui.util.extensions
 
-private val metaCharacters = setOf(
+private val META_CHARACTERS = setOf(
     "\\",
     "^",
     "$",
@@ -21,7 +21,7 @@ private val metaCharacters = setOf(
 
 fun String.formatQuery(): String {
     forEach {
-        if (it.toString() in metaCharacters) {
+        if (it.toString() in META_CHARACTERS) {
             replace(it.toString(), "\\$it")
         }
     }

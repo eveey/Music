@@ -26,6 +26,10 @@
             android:name=".ui.spotify.artists.ArtistsActivity"
             android:launchMode="singleTop"
             android:parentActivityName=".ui.spotify.authentication.AuthenticationActivity" />
+
+        <activity
+            android:name=".ui.spotify.artists.details.ArtistDetailsActivity"
+            android:parentActivityName=".ui.spotify.artists.ArtistsActivity" />
     </application>
 
 </manifest>

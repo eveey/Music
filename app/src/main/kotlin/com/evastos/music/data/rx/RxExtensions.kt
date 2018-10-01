@@ -1,8 +1,8 @@
 package com.evastos.music.data.rx
 
-import android.content.Context
 import com.evastos.music.data.exception.ExceptionMapper
-import com.evastos.music.ui.util.extensions.isConnectedToNetwork
+import com.evastos.music.data.exception.network.NetworkFailFastException
+import com.evastos.music.data.network.connectivity.NetworkConnectivityProvider
 import io.reactivex.Flowable
 import io.reactivex.Observable
 import io.reactivex.Single
@@ -36,13 +36,13 @@ fun <T> Single<T>.delayError(): Single<T> =
                     .flatMapSingle { error -> Single.error<Unit>(error) }
         }
 
-fun <T> Single<T>.checkNetwork(context: Context, e: Throwable): Single<T> {
-    return Single.just(context.isConnectedToNetwork())
+fun <T> Single<T>.checkNetwork(connectivityProvider: NetworkConnectivityProvider): Single<T> {
+    return Single.just(connectivityProvider.isConnected())
             .flatMap { it ->
                 if (it) {
                     this
                 } else {
-                    Single.error<T>(e)
+                    Single.error<T>(NetworkFailFastException())
                 }
             }
 }
