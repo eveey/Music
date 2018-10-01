@@ -8,7 +8,6 @@ import com.evastos.music.data.model.spotify.item.ItemTypes
 import com.evastos.music.data.model.spotify.item.artist.Artist
 import com.evastos.music.data.model.spotify.search.SearchResponse
 import com.evastos.music.data.network.connectivity.NetworkConnectivityProvider
-import com.evastos.music.data.persistence.db.artist.ArtistDao
 import com.evastos.music.data.rx.applySchedulers
 import com.evastos.music.data.rx.checkNetwork
 import com.evastos.music.data.rx.delayError
@@ -23,7 +22,6 @@ import io.reactivex.disposables.CompositeDisposable
 class ArtistsSearchDataSource(
     private val query: String,
     private val spotifyService: SpotifyService,
-    private val artistDao: ArtistDao,
     private val exceptionMapper: ExceptionMappers.Spotify,
     private val exceptionMessageProvider: ExceptionMessageProviders.Spotify,
     private val networkConnectivityProvider: NetworkConnectivityProvider,
@@ -112,14 +110,6 @@ class ArtistsSearchDataSource(
                         loadingState.postValue(LoadingState.Loading())
                     }
                     .checkNetwork(networkConnectivityProvider)
-                    .doOnSuccess { response ->
-                        if (page == PAGE_INITIAL) {
-                            artistDao.deleteAllArtists()
-                        }
-                        response.artists?.items?.let {
-                            artistDao.insertArtists(it)
-                        }
-                    }
                     .delayError()
                     .mapException(exceptionMapper)
                     .applySchedulers()

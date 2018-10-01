@@ -3,7 +3,7 @@ package com.evastos.music.domain.spotify.authentication
 import android.arch.lifecycle.MutableLiveData
 import com.evastos.music.BuildConfig
 import com.evastos.music.data.exception.ExceptionMappers
-import com.evastos.music.data.model.auth.AuthData
+import com.evastos.music.data.model.authentication.AuthData
 import com.evastos.music.data.model.spotify.user.User
 import com.evastos.music.data.persistence.prefs.PreferenceStore
 import com.evastos.music.data.rx.applySchedulers
@@ -22,7 +22,7 @@ import io.reactivex.disposables.CompositeDisposable
 import timber.log.Timber
 import javax.inject.Inject
 
-class SpotifyAuthenticationRepository
+class AuthenticationRepository
 @Inject constructor(
     private val spotifyService: SpotifyService,
     private val spotifyScopes: Scopes.Spotify,

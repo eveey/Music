@@ -17,6 +17,7 @@ import com.evastos.music.inject.module.GlideApp
 import com.evastos.music.ui.base.BaseActivity
 import com.evastos.music.ui.spotify.artists.adapter.ArtistsAdapter
 import com.evastos.music.ui.spotify.artists.adapter.suggestions.ArtistSuggestionsAdapter
+import com.evastos.music.ui.spotify.artists.details.ArtistDetailsActivity
 import com.evastos.music.ui.util.extensions.setGone
 import com.evastos.music.ui.util.extensions.setNotRefreshing
 import com.evastos.music.ui.util.extensions.setRefreshing
@@ -43,7 +44,7 @@ class ArtistsActivity : BaseActivity() {
 
     private lateinit var artistsAdapter: ArtistsAdapter
 
-    private lateinit var searchView: SearchView
+    private var searchView: SearchView? = null
 
     @SuppressLint("CheckResult")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -106,7 +107,7 @@ class ArtistsActivity : BaseActivity() {
 
         viewModel.artistDetailsLiveData.observe(this, Observer { artist ->
             artist?.let {
-                //                startActivity(ArtistDetailsActivity.newIntent(this, it))
+                startActivity(ArtistDetailsActivity.newIntent(this, it))
             }
         })
 
@@ -129,8 +130,8 @@ class ArtistsActivity : BaseActivity() {
         menuInflater.inflate(R.menu.menu_activity_artists, menu)
         val searchItem = menu.findItem(R.id.searchArtistsAction)
 
-        searchView = searchItem.actionView as SearchView
-        searchView.apply {
+        searchView = searchItem.actionView as? SearchView
+        searchView?.apply {
             suggestionsAdapter = artistSuggestionsAdapter
 
             setOnSuggestionListener(object : SearchView.OnSuggestionListener {

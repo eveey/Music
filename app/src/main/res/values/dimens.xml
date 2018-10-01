@@ -8,6 +8,7 @@
     <dimen name="spacing_4x">32dp</dimen>
     <dimen name="spacing_5x">40dp</dimen>
     <dimen name="spacing_6x">48dp</dimen>
+    <dimen name="spacing_8x">64dp</dimen>
 
     <!-- Text sizes -->
     <dimen name="textSizeXLarge">32sp</dimen>

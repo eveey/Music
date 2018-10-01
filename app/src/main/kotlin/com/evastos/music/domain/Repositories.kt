@@ -2,7 +2,6 @@ package com.evastos.music.domain
 
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
-import android.arch.paging.PagedList
 import com.evastos.music.data.model.spotify.item.artist.Artist
 import com.evastos.music.data.model.spotify.user.User
 import com.evastos.music.domain.livedata.Listing
@@ -32,8 +31,6 @@ interface Repositories {
         interface Artists {
 
             val artistSearchLiveData: MutableLiveData<String>
-
-            fun getCachedArtists(disposables: CompositeDisposable): LiveData<PagedList<Artist>>
 
             fun searchArtists(
                 query: String? = null,

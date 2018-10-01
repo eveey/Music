@@ -36,8 +36,8 @@ fun <T> Single<T>.delayError(): Single<T> =
                     .flatMapSingle { error -> Single.error<Unit>(error) }
         }
 
-fun <T> Single<T>.checkNetwork(networkConnectivityProvider: NetworkConnectivityProvider): Single<T> {
-    return Single.just(networkConnectivityProvider.isConnected())
+fun <T> Single<T>.checkNetwork(connectivityProvider: NetworkConnectivityProvider): Single<T> {
+    return Single.just(connectivityProvider.isConnected())
             .flatMap { it ->
                 if (it) {
                     this
